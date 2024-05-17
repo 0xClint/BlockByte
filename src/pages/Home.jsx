@@ -236,7 +236,7 @@ const Home = () => {
           >
             <h2 className="card-header-container text-2xl ">Create World</h2>
             <div className="card-content-container h-[200px] make-flex">
-              <img src={landImg} className="" />
+              <img src={landImg} className="w-[80%]" />
             </div>
           </div>
           <div
@@ -245,7 +245,7 @@ const Home = () => {
           >
             <h2 className="card-header-container text-2xl ">Load World</h2>
             <div className="card-content-container h-[200px] make-flex">
-              <img src={landsImg} className="" />
+              <img src={landsImg} className="w-[80%]" />
             </div>
           </div>
           <div
@@ -254,7 +254,7 @@ const Home = () => {
           >
             <h2 className="card-header-container text-2xl ">Create World</h2>
             <div className="card-content-container h-[200px] make-flex">
-              <img src={settingIcon} className="" />
+              <img src={settingIcon} className="w-[60%]" />
             </div>
           </div>
         </div>
