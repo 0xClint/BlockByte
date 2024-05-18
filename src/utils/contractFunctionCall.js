@@ -110,6 +110,7 @@ export const getItemNFTsByOwnerFunc = async (signer) => {
 // ***********item NFT contract************
 
 export const createItemFunc = async (signer, CID, name, description) => {
+  console.log(typeof CID);
   try {
     const contract = new ethers.Contract(
       ITEM_NFT_CONTRACT_ADDRESS,
@@ -132,6 +133,34 @@ export const createItemFunc = async (signer, CID, name, description) => {
   }
 };
 
+export const getItemsByOwnerFunc = async (signer) => {
+  try {
+    const contract = new ethers.Contract(
+      ITEM_NFT_CONTRACT_ADDRESS,
+      ITEM_NFT_CONTRACT_ABI,
+      signer
+    );
+    const account = await signer.getAddress();
+    const res = await contract.getItemsByOwner(account);
+    return res;
+  } catch (error) {
+    console.error("Error calling contract function:", error);
+  }
+};
+
+export const levelUpItemsFunc = async (signer, uri) => {
+  try {
+    const contract = new ethers.Contract(
+      ITEM_NFT_CONTRACT_ADDRESS,
+      ITEM_NFT_CONTRACT_ABI,
+      signer
+    );
+    const tx = await contract.levelUp(uri);
+    await tx.wait();
+  } catch (error) {
+    console.error("Error calling contract function:", error);
+  }
+};
 // ***********item NFT contract************
 
 export const createCustomItemFunc = async (signer, CID, description) => {

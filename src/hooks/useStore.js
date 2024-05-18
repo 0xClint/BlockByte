@@ -75,13 +75,20 @@ export const useStore = create((set) => ({
   },
   NFTData: [],
   setNFTData: (args) => {
+    // console.log(args);
     if (args) {
-      const data = imgData;
-      data.forEach((item1) => {
-        item1.isOpen = args.some((item2) => Number(item2) == item1.tokenId);
+      const data = [];
+      imgData.forEach((item1) => {
+        args.forEach((item2) => {
+          if (Number(item2.uri) == item1.tokenId) {
+            item1.level = Number(item2.level);
+            item1.uri = Number(item2.tokenId);
+            data.push(item1);
+          }
+        });
       });
       set(() => ({
-        NFTData: [...data],
+        NFTData: Array.from(new Set(data)),
       }));
     }
   },

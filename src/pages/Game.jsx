@@ -22,7 +22,10 @@ import { useStore } from "../hooks/useStore";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Clouds from "../components/Clouds";
-import { getItemNFTsByOwnerFunc } from "../utils/contractFunctionCall";
+import {
+  getItemNFTsByOwnerFunc,
+  getItemsByOwnerFunc,
+} from "../utils/contractFunctionCall";
 
 const Game = () => {
   const [
@@ -101,7 +104,7 @@ const Game = () => {
       await provider.send("eth_requestAccounts", []);
       const signer = await provider.getSigner();
       try {
-        const tempData = await getItemNFTsByOwnerFunc(signer);
+        const tempData = await getItemsByOwnerFunc(signer);
         setNFTData(tempData);
       } catch (error) {
         console.log(error);

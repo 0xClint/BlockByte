@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import { useStore } from "../hooks/useStore";
 import * as imgSrc from "../images/Items/index";
 import Loader from "./Loader";
-import { mintitemNFTFunc } from "../utils/contractFunctionCall";
+import { createItemFunc, mintitemNFTFunc } from "../utils/contractFunctionCall";
 
 const Shop = () => {
   const [setShopMenu, allNFTsData, NFTData] = useStore((state) => [
@@ -25,67 +25,93 @@ const Shop = () => {
     filterNFTs();
   }, [NFTData]);
 
-  const buyItemNFT = async (tokenId) => {
+  const buyItemNFT = async (tokenId, name) => {
     setLoader(true);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await provider.send("eth_requestAccounts", []);
     const signer = await provider.getSigner();
-    await mintitemNFTFunc(signer, tokenId);
+    await createItemFunc(signer, tokenId.toString(), name, "demo");
     setLoader(false);
     setBuyMenu(false);
   };
 
   return (
-    <div
-      className="card-box absolute z-100 make-flex w-screen h-screen"
-      style={{ background: "rgba(223, 223, 223, 0.22)" }}
-    >
+    <div className="card-box absolute z-100 make-flex w-screen h-screen">
       {buyMenu && (
-        <div className="menu absolute z-10 make-flex w-screen h-screen">
-          <div
-            className="absolute z-10 translate-x-[175px] text-white -translate-y-[125px] cursor-pointer"
-            onClick={() => setBuyMenu(false)}
-          >
-            X
-          </div>
-          <div className="card-container w-[400px] h-[300px] bg-[#863c26] make-flex justify-start flex-col gap-1  px-5 pt-7 ">
-            <div className="make-flex justify-between w-full px-3">
-              <h3 className=" w-full ">{buyNFTdata?.texture}</h3>
-              <h3 className=" w-full text-right make-flex gap-2">Mintable</h3>
-            </div>
-            <div className="w-full h-[170px] make-flex flex-col bg-[#ead04e] rounded-lg">
-              <img src={buyNFTdata.src} alt="landImg" className="h-[60%] " />
-            </div>
-            <div className="w-full make-flex justify-between my-2">
-              <div className=" py-2 px-3 border make-flex rounded-md  h-8 text-lg w-[160px]">
-                10k Wei
+        <div className="menu absolute z-10 make-flex w-screen h-screen bg-[#2d2d2d84]">
+          <div className="w-[500px]">
+            <h2
+              className="card-header-container text-3xl"
+              style={{ background: "#A6D6ED" }}
+            >
+              {buyNFTdata?.texture}
+              <div className="absolute w-[500px] -translate-x-5 -translate-y-11  text-white make-flex justify-end px-2 pt-2 ">
+                <span
+                  className="cursor-pointer"
+                  onClick={() => setBuyMenu(false)}
+                >
+                  X
+                </span>
               </div>
-              <button
-                className="btn w-[100px] hover:scale-105"
-                onClick={() => buyItemNFT(buyNFTdata?.tokenId)}
-              >
-                Buy
-              </button>
+            </h2>
+
+            <div className="card-content-container w-[95%]  make-flex justify-start flex-col gap-5  p-5 ">
+              <div className="w-full h-[170px] make-flex gap-10">
+                <div className="w-[180px] h-full  bg-[#EB91F9] make-flex rounded-lg">
+                  <img
+                    src={buyNFTdata.src[0]}
+                    alt="landImg"
+                    className="h-[60%] "
+                  />
+                </div>
+                <div className="w-1/2 h-full grid pt-8 grid-cols-2 gap-3 font-outline-2 text-white">
+                  <ul className="flex flex-col gap-3">
+                    <li>level</li>
+                    <li>type</li>
+                    <li>color</li>
+                  </ul>
+                  <ul className="flex flex-col gap-3">
+                    <li>0</li>
+                    <li>grass</li>
+                    <li>green</li>
+                  </ul>
+                </div>
+              </div>
+              <div className="w-full make-flex justify-between my-2">
+                <div className="btn  py-2 px-3 border-2 border-black make-flex rounded-md bg-[#19B294] text-lg w-[160px]">
+                  10k Wei
+                </div>
+                <button
+                  className="btn w-[100px] make-flex bg-[#5789C4] hover:scale-105"
+                  onClick={() =>
+                    buyItemNFT(buyNFTdata?.tokenId, buyNFTdata?.texture)
+                  }
+                >
+                  Buy
+                </button>
+              </div>
             </div>
           </div>
         </div>
       )}
-      <div className="menu-container flex min-w-[600px] max-w-[1100px] flex-col card-container p-7">
-        <div className=" w-full ">
-          <div className="w-full make-flex justify-end">
-            <div
-              className="absolute  cursor-pointer translate-x-2 "
-              onClick={() => setShopMenu(false)}
-            >
+      <div className=" min-w-[600px] max-w-[1100px]">
+        <h2
+          className="card-header-container text-3xl"
+          style={{ background: "#A6D6ED" }}
+        >
+          Marketplace
+          <div className="absolute w-[1000px] -translate-x-5 -translate-y-11  text-white make-flex justify-end px-2 pt-2 ">
+            <span className="cursor-pointer" onClick={() => setShopMenu(false)}>
               X
-            </div>
+            </span>
           </div>
-          <div className="relative -translate-y-3">Marketplace</div>
-        </div>
-        <div className="flex h-auto min-h-[400px] gap-7">
-          <div className="right-menu w-full flex justify-center flex-wrap gap-2">
-            {imgSrc.imgData.map(({ texture, src, isOpen, tokenId }) => {
-              console.log(texture, src, isOpen);
+        </h2>
+        <div
+          style={{ width: "97%" }}
+          className="card-content-container flex h-auto min-h-[400px] gap-7 p-4"
+        >
+          <div className="right-menu w-full flex justify-center flex-wrap gap-4">
+            {imgSrc.imgData.map(({ texture, src, isOpen, tokenId, color }) => {
               return (
                 <div
                   key={tokenId}
@@ -97,22 +123,27 @@ const Shop = () => {
                     });
                     setBuyMenu(true);
                   }}
-                  className="w-[150px] h-[180px] cursor-pointer rounded-xl flex bg-[#5e2919] flex-col gap-1  justify-end p-2 pt-2 items-center shadow-xl hover:scale-[101%]"
+                  className="w-[180px] h-[180px] cursor-pointer rounded-xl flex bg-[#253844] border-2 border-black flex-col gap-1  justify-end p-2 pt-2 items-center shadow-xl hover:scale-[101%]"
                 >
                   <div className="flex justify-between w-full px-1 text-xs">
-                    <h3 className=" w-full ">{texture}</h3>
+                    <h3 className=" w-full text-white font-outline-2">
+                      {texture}
+                    </h3>
                     <button className="font-light text-[0.8rem] px-1 bg-[#50BA4A] rounded-lg">
-                      buy
+                      level0
                     </button>
                   </div>
-                  <div className="w-full  h-[150px] make-flex flex-col rounded-xl bg-[#ead04e]">
+                  <div
+                    className="w-full  h-[150px] make-flex flex-col rounded-xl"
+                    style={{ backgroundColor: color }}
+                  >
                     <img
-                      src={src}
+                      src={src[0]}
                       alt="landImg"
                       className="w-[60%] h-auto -translate-y-5"
                     />
                   </div>
-                  <div className="absolute w-[125px] py-1 px-3 font-medium text-xs bg-[#c9953b] rounded-2xl flex justify-between -translate-y-2 text-white">
+                  <div className="absolute w-[125px] py-1 px-3 font-medium text-xs bg-[#eb5a79] border-2 border-black rounded-2xl flex justify-between -translate-y-2 text-white">
                     <span>price</span>
                     <span>10k Wei</span>
                   </div>

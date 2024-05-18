@@ -1,55 +1,81 @@
 import { NearestFilter, TextureLoader } from "three";
-import grass1 from "./grass1.png";
-import grass2 from "./grass2.png";
-import grass3 from "./grass3.png";
-import grass4 from "./grass4.png";
-import grass5 from "./grass5.png";
-import grass6 from "./grass6.png";
-import flower1 from "./flower1.png";
-import flower2 from "./flower2.png";
-import flower3 from "./flower3.png";
-import flower4 from "./flower4.png";
-import flower5 from "./flower5.png";
-import flower6 from "./flower6.png";
+import flower1L1 from "./flower1L1.png";
+import flower1L2 from "./flower1L2.png";
+import flower1L3 from "./flower1L3.png";
 
-const grass1Texture = new TextureLoader().load(grass1);
-const grass2Texture = new TextureLoader().load(grass2);
-const grass3Texture = new TextureLoader().load(grass3);
-const grass4Texture = new TextureLoader().load(grass4);
-const grass5Texture = new TextureLoader().load(grass5);
-const grass6Texture = new TextureLoader().load(grass6);
-const flower1Texture = new TextureLoader().load(flower1);
-const flower2Texture = new TextureLoader().load(flower2);
-const flower3Texture = new TextureLoader().load(flower3);
-const flower4Texture = new TextureLoader().load(flower4);
-const flower5Texture = new TextureLoader().load(flower5);
-const flower6Texture = new TextureLoader().load(flower6);
+import flower2L1 from "./flower2L1.png";
+import flower2L2 from "./flower2L2.png";
+import flower2L3 from "./flower2L3.png";
 
-grass1Texture.magFilter = NearestFilter;
-grass2Texture.magFilter = NearestFilter;
-grass3Texture.magFilter = NearestFilter;
-grass4Texture.magFilter = NearestFilter;
-grass5Texture.magFilter = NearestFilter;
-grass6Texture.magFilter = NearestFilter;
-flower1Texture.magFilter = NearestFilter;
-flower2Texture.magFilter = NearestFilter;
-flower3Texture.magFilter = NearestFilter;
-flower4Texture.magFilter = NearestFilter;
-flower5Texture.magFilter = NearestFilter;
-flower6Texture.magFilter = NearestFilter;
+import flower3L1 from "./flower3L1.png";
+import flower3L2 from "./flower3L2.png";
+import flower3L3 from "./flower3L3.png";
+
+import flower4L1 from "./flower4L1.png";
+import flower4L2 from "./flower4L2.png";
+import flower4L3 from "./flower4L3.png";
+
+import flower5L1 from "./flower5L1.png";
+import flower5L2 from "./flower5L2.png";
+import flower5L3 from "./flower5L3.png";
+
+const flower1L1Texture = new TextureLoader().load(flower1L1);
+const flower1L2Texture = new TextureLoader().load(flower1L2);
+const flower1L3Texture = new TextureLoader().load(flower1L3);
+
+const flower2L1Texture = new TextureLoader().load(flower2L1);
+const flower2L2Texture = new TextureLoader().load(flower2L2);
+const flower2L3Texture = new TextureLoader().load(flower2L3);
+
+const flower3L1Texture = new TextureLoader().load(flower3L1);
+const flower3L2Texture = new TextureLoader().load(flower3L2);
+const flower3L3Texture = new TextureLoader().load(flower3L3);
+
+const flower4L1Texture = new TextureLoader().load(flower4L1);
+const flower4L2Texture = new TextureLoader().load(flower4L2);
+const flower4L3Texture = new TextureLoader().load(flower4L3);
+
+const flower5L1Texture = new TextureLoader().load(flower5L1);
+const flower5L2Texture = new TextureLoader().load(flower5L2);
+const flower5L3Texture = new TextureLoader().load(flower5L3);
+
+
+
+flower1L1Texture.magFilter = NearestFilter;
+flower1L2Texture.magFilter = NearestFilter;
+flower1L3Texture.magFilter = NearestFilter;
+
+flower2L1Texture.magFilter = NearestFilter;
+flower2L2Texture.magFilter = NearestFilter;
+flower2L3Texture.magFilter = NearestFilter;
+
+flower3L1Texture.magFilter = NearestFilter;
+flower3L2Texture.magFilter = NearestFilter;
+flower3L3Texture.magFilter = NearestFilter;
+
+flower4L1Texture.magFilter = NearestFilter;
+flower4L2Texture.magFilter = NearestFilter;
+flower4L3Texture.magFilter = NearestFilter;
+
+flower5L1Texture.magFilter = NearestFilter;
+flower5L2Texture.magFilter = NearestFilter;
+flower5L3Texture.magFilter = NearestFilter;
+
 
 export {
-  grass1Texture,
-  grass2Texture,
-  grass3Texture,
-  grass4Texture,
-  grass5Texture,
-  grass6Texture,
-  flower1Texture,
-  flower2Texture,
-  flower3Texture,
-  flower4Texture,
-  flower5Texture,
-  flower6Texture,
-
+  flower1L1Texture,
+  flower1L2Texture,
+  flower1L3Texture,
+  flower2L1Texture,
+  flower2L2Texture,
+  flower2L3Texture,
+  flower3L1Texture,
+  flower3L2Texture,
+  flower3L3Texture,
+  flower4L1Texture,
+  flower4L2Texture,
+  flower4L3Texture,
+  flower5L1Texture,
+  flower5L2Texture,
+  flower5L3Texture,
 };
