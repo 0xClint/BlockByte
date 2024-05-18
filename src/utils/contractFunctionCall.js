@@ -109,7 +109,7 @@ export const getItemNFTsByOwnerFunc = async (signer) => {
 
 // ***********item NFT contract************
 
-export const createItemFunc = async (signer, CID) => {
+export const createItemFunc = async (signer, CID, name, description) => {
   try {
     const contract = new ethers.Contract(
       ITEM_NFT_CONTRACT_ADDRESS,
@@ -117,7 +117,15 @@ export const createItemFunc = async (signer, CID) => {
       signer
     );
     const account = await signer.getAddress();
-    const tx = await contract.createItemByUser(account, CID, 10, 1);
+    const tx = await contract.createItem(
+      account,
+      CID,
+      1,
+      1,
+      name,
+      description,
+      { value: 10000 }
+    );
     await tx.wait();
   } catch (error) {
     console.error("Error calling contract function:", error);

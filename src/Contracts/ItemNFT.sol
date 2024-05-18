@@ -20,13 +20,15 @@ contract BlockByteItems is ERC1155, Ownable {
         address owner;
         string uri;
         uint256 level;
+        string username;
+        string description;
     }
 
     mapping(uint256 => Item) private items;
     mapping(uint256 => bool) public tokenExists;
     mapping(uint256 => address) public tokenOwners;
 
-    event ItemCreated(uint256 indexed tokenId, address indexed owner, string uri, uint256 level);
+    event ItemCreated(uint256 indexed tokenId, address indexed owner, string uri, uint256 level, string username, string description);
     event ItemLevelUp(uint256 indexed tokenId, uint256 newLevel);
     event BaseFeeChanged(uint256 newBaseFee);
     event TokenURIUpdated(uint256 indexed tokenId, string newURI);
@@ -47,7 +49,7 @@ contract BlockByteItems is ERC1155, Ownable {
         _transferOwnership(msg.sender); 
     }
 
-    function createItem(address _owner, string memory _uri, uint256 _quantity, uint256 _initialLevel)
+    function createItem(address _owner, string memory _uri, uint256 _quantity, uint256 _initialLevel, string memory _username, string memory _description)
         external
         payable
         returns (uint256)
@@ -65,11 +67,13 @@ contract BlockByteItems is ERC1155, Ownable {
                 tokenId: tokenId,
                 owner: _owner,
                 uri: _uri,
-                level: _initialLevel
+                level: _initialLevel,
+                username: _username,
+                description: _description
             });
             tokenExists[tokenId] = true;
             tokenOwners[tokenId] = _owner;
-            emit ItemCreated(tokenId, _owner, _uri, _initialLevel);
+            emit ItemCreated(tokenId, _owner, _uri, _initialLevel, _username, _description);
             _nextTokenId.increment();
         }
 
@@ -160,3 +164,4 @@ contract BlockByteItems is ERC1155, Ownable {
         revert("Fallback function called");
     }
 }
+\
